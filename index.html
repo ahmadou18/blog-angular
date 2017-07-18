@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+<link rel="stylesheet" href="style.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+<body ng-app="myApp">
+    <div class="container" ng-controller="MainCtrl">
+        <form class="form form-controller" ng-submit="ajouter(date, texte)">
+            <input type="date" name="texte" ng-model="date"  placeholder="Date" required>
+            <textarea name="text" id="txta" ng-model="texte" cols="40" rows="5" placeholder="Entrez votre note"></textarea>
+            <br>
+            <button class="btn btn-submit" type="submit">Ajouter</button>
+        </form>
+
+        <table class="table table-bordered">
+            <tr>
+                <th>Date</th>
+                <th>Notes</th>
+            </tr>
+            <tr ng-repeat="note in notes">
+                <td>{{note.date}}</td>
+                <td>{{note.texte}}</td>
+            </tr>
+        </table>
+
+        <script>
+            const app = angular.module("myApp",[]);
+
+            app.controller("MainCtrl", function($scope) {
+                $scope.notes = [];
+                $scope.ajouter = function (date, texte) {
+                    $scope.notes.push({'date':date, 'texte':texte});
+                };
+            })
+
+
+        </script>
+    </div>
+</body>
+</html>
